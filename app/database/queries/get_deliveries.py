@@ -4,7 +4,7 @@ from app.database.models.delivery import Delivery
 from app.database.models.sync_session import sync_session
 
 
-async def get_deliveries(current_app, jsonify):
+def get_deliveries(current_app, jsonify):
     try:
         with sync_session() as session:
             with session.begin():

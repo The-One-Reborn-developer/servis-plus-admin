@@ -4,7 +4,7 @@ from app.database.models.user import User
 from app.database.models.sync_session import sync_session
 
 
-async def get_users(current_app, jsonify, service_name):
+def get_users(current_app, jsonify, service_name):
     fields = []
     
     if service_name == 'services':
@@ -36,7 +36,7 @@ async def get_users(current_app, jsonify, service_name):
         with sync_session() as session:
             with session.begin():
                 query = select(*fields).order_by(User.telegram_id)
-                results = await session.execute(query).all()
+                results = session.execute(query).all()
 
                 users = [dict(row._mapping) for row in results]
 
