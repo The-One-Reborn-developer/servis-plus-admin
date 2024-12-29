@@ -47,6 +47,7 @@ def handle_login():
         return redirect(url_for('admin.dashboard'))
     else:
         flash('Неправильный логин или пароль', 'error')
+        current_app.logger.error(f'Failed login attempt for user: {username} with password: {password}')
         return redirect(url_for('admin.login'))
     
 
