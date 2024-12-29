@@ -75,13 +75,18 @@ def table_data():
 
     try:
         if table_name == 'Пользователи':
-            data = get_users(current_app, jsonify, service_name)
+            data = get_users(service_name)
         elif table_name == 'Заказы':
             data = get_bids()
         elif table_name == 'Доставки':
             data = get_deliveries()
+        else:
+            return jsonify({'error': f'Invalid table name provided: {table_name}'}), 400
 
         return jsonify(data), 200
+    except ValueError as ve:
+        current_app.logger.error(f'Validation error for table {table_name}: {str(ve)}')
+        return jsonify({'error': f'Validation error for table {table_name}: {str(ve)}'}), 400
     except Exception as e:
         current_app.logger.error(f'Error fetching data for table {table_name}: {str(e)}')
         return jsonify({'error': f'Error fetching data for table {table_name}: {str(e)}'}), 500

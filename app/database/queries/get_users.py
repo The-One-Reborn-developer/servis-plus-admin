@@ -4,7 +4,7 @@ from app.database.models.user import User
 from app.database.models.sync_session import sync_session
 
 
-def get_users(current_app, jsonify, service_name):
+def get_users(service_name):
     fields = []
     
     if service_name == 'services':
@@ -31,16 +31,14 @@ def get_users(current_app, jsonify, service_name):
             User.registered_in_delivery,
             User.delivery_registration_date
         ]
+
+    if not fields:
+        raise ValueError(f'Invalid service name: {service_name}')
     
-    try:
-        with sync_session() as session:
-            with session.begin():
-                query = select(*fields).order_by(User.telegram_id)
-                results = session.execute(query).all()
+    with sync_session() as session:
+        with session.begin():
+            query = select(*fields).order_by(User.telegram_id)
+            results = session.execute(query).all()
 
-                users = [dict(row._mapping) for row in results]
-
-        return users
-    except Exception as e:
-        current_app.logger.error(f'Error fetching users for service {service_name}: {str(e)}')
-        return jsonify({'error': f'Error fetching users for service {service_name}: {str(e)}'}), 500
+            users = [dict(row._mapping) for row in results]
+            return users
