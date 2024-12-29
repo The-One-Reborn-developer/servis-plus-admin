@@ -75,7 +75,7 @@ def table_data():
 
     try:
         if table_name == 'Пользователи':
-            data = get_users(service_name)
+            data = get_users(current_app, jsonify, service_name)
         elif table_name == 'Заказы':
             data = get_bids()
         elif table_name == 'Доставки':
