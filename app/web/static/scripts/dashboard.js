@@ -3,11 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     serviceButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
+            // Remove 'selected' class from all buttons
+            serviceButtons.forEach(btn => btn.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked button
+            event.target.classList.add('selected');
+            
             const service = event.target.getAttribute('data-service');
 
             try {
                 // Fetch tables for the selected service
-                const response = await fetch(`/api/tables?service=${service}`);
+                const response = await fetch(`/dashboard/tables?service=${service}`);
                 const tables = await response.json();
 
                 const serviceHeader = document.querySelector('.service-data-header');
@@ -16,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok && tables.length > 0) {
                     // Clear previous header and content
                     serviceHeader.innerHTML = '';
-                    serviceContent.innerHTML = '<p>Выберите таблицу, чтобы увидеть данные.</p>';
+                    serviceContent.innerHTML = '<p class="flash-message">Выберите таблицу, чтобы увидеть данные.</p>';
 
                     // Render buttons for tables
                     tables.forEach(table => {
@@ -26,46 +32,36 @@ document.addEventListener('DOMContentLoaded', () => {
                         tableButton.dataset.table = table.name;
 
                         // Attach event listener to fetch table data
-                        tableButton.addEventListener('click', () => fetchTableData(service, table.name));
+                        tableButton.addEventListener('click', async (event) => {
+                            const tableButtons = document.querySelectorAll('.table-select-button');
+                            tableButtons.forEach(btn => btn.classList.remove('selected'));
+                            event.target.classList.add('selected');
+
+                            await fetchTableData(service, table.name)
+                        });
+
                         serviceHeader.appendChild(tableButton);
                     });
                 } else {
-                    serviceHeader.innerHTML = '<p>Нет доступных таблиц для данного сервиса.</p>';
+                    serviceHeader.innerHTML = '<p class="flash-message error">Нет доступных таблиц для данного сервиса.</p>';
                     serviceContent.innerHTML = '';
                 }
             } catch (error) {
                 console.error('Error fetching tables:', error);
-            }
+                const serviceHeader = document.querySelector('.service-data-header');
+                serviceHeader.innerHTML = '<p class="flash-message error">Произошла ошибка. Пожалуйста, попробуйте еще раз.</p>';
+            };
         });
     });
-
-    // Function to fetch and display table data
-    async function fetchTableData(service, tableName) {
-        const serviceContent = document.querySelector('.service-data-content');
-
-        try {
-            const response = await fetch(`/api/table-data?service=${service}&table=${tableName}`);
-            const rows = await response.json();
-
-            if (response.ok && rows.length > 0) {
-                let table = `<table>
-                    <thead>
-                        <tr>${Object.keys(rows[0]).map(key => `<th>${key}</th>`).join('')}</tr>
-                    </thead>
-                    <tbody>`;
-
-                rows.forEach(row => {
-                    table += `<tr>${Object.values(row).map(value => `<td>${value}</td>`).join('')}</tr>`;
-                });
-
-                table += `</tbody></table>`;
-                serviceContent.innerHTML = table;
-            } else {
-                serviceContent.innerHTML = '<p>Данные таблицы не найдены.</p>';
-            }
-        } catch (error) {
-            console.error('Error fetching table data:', error);
-            serviceContent.innerHTML = '<p>Ошибка загрузки данных таблицы.</p>';
-        }
-    }
 });
+
+async function fetchTableData(service, table) {
+    try {
+        const response = await fetch(`/dashboard/table?service=${service}&table=${table}`);
+        const data = await response.json();
+    } catch (error) {
+        console.error('Error fetching table data:', error);
+        const serviceData = document.querySelector('.service-data-content');
+        serviceData.innerHTML = '<p class="flash-message error">Произошла ошибка. Пожалуйста, попробуйте еще раз.</p>';
+    };
+};
