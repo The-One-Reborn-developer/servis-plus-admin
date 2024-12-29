@@ -16,3 +16,6 @@ class Bid(Base):
     deadline_to: Mapped[str] = mapped_column(String(20), nullable=False)
     instrument_provided: Mapped[bool] = mapped_column(Boolean, nullable=False)
     closed: Mapped[bool] = mapped_column(Boolean, default=False)
+
+    def to_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
