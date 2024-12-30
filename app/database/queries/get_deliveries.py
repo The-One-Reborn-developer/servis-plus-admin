@@ -8,4 +8,4 @@ def get_deliveries():
     with sync_session() as session:
         with session.begin():
             deliveries = session.scalars(select(Delivery)).all()
-            return deliveries
+            return [delivery.to_dict() for delivery in deliveries]
