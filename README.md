@@ -1,4 +1,4 @@
-# Servis Plus
+# Servis Plus Admin
 
 Admin panel for the [Servis Plus WebApp](https://github.com/The-One-Reborn-developer/servis-plus-dev)
 
