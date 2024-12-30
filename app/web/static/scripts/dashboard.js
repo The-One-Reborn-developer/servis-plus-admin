@@ -224,6 +224,8 @@ async function fetchTableData(service, table) {
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
                     } else if (column === 'delivery_role') {
                         td.textContent = cellTranslations[row[column]] || row[column];
+                    } else if (column === 'has_car' && row['delivery_role'] === 'customer') {
+                        return;
                     } else if (column === 'has_car') {
                         const booleanValue = row[column] === true ? 'true' : 'false';
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
