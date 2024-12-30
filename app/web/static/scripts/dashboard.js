@@ -64,6 +64,7 @@ async function fetchTableData(service, table) {
         serviceData.innerHTML = '';
 
         let columnOrder = [];
+        let columnNames = {};
 
         if (service === 'services' && table === 'Пользователи') {
             columnOrder = [
@@ -74,6 +75,15 @@ async function fetchTableData(service, table) {
                 'experience',
                 'services_registration_date'
             ]
+
+            columnNames = {
+                'telegram_id': 'Телеграм ID',
+                'services_name': 'Имя',
+                'services_role': 'Роль',
+                'rate': 'Ставка ₽/час',
+                'experience': 'Опыт (в годах)',
+                'services_registration_date': 'Дата регистрации'
+            }
         };
 
         if (response.ok && data.length > 0) {
@@ -84,7 +94,7 @@ async function fetchTableData(service, table) {
             headerRow.className = 'data-table-header';
             columnOrder.forEach(column => {
                 const th = document.createElement('th');
-                th.textContent = column;
+                th.textContent = columnNames[column] || column;
                 headerRow.appendChild(th);
             })
             tableElement.appendChild(headerRow);
