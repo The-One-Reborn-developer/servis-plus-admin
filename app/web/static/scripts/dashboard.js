@@ -119,6 +119,19 @@ async function fetchTableData(service, table) {
                 'true': 'Да',
                 'false': 'Нет'
             };
+        } else if (service === 'delivery' && table === 'Пользователи') {
+            columnOrder = [
+                'telegram_id',
+                'delivery_name',
+                'delivery_role',
+                'date_of_birth',
+                'has_car',
+                'car_model',
+                'car_width',
+                'car_length',
+                'car_height',
+                'delivery_registration_date'
+            ];
         };
 
         if (response.ok && data.length > 0) {
