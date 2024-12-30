@@ -172,8 +172,8 @@ async function fetchTableData(service, table) {
                 'customer_name': 'Имя заказчика',
                 'city': 'Город',
                 'description': 'Описание',
-                'deliver_from': 'Дата начала',
-                'deliver_to': 'Дата окончания',
+                'deliver_from': 'Откуда доставить',
+                'deliver_to': 'Куда доставить',
                 'closed': 'Закрыта'
             };
 
