@@ -144,9 +144,12 @@ async function fetchTableData(service, table) {
                     
                     if (column === 'services_role') {
                         td.textContent = cellTranslations[row[column]] || row[column];
+                    } else if (column === 'closed' || column === 'instrument_provided') {
+                        const booleanValue = row[column] === true ? 'true' : 'false';
+                        td.textContent = cellTranslations[booleanValue] || booleanValue;
                     } else {
                         td.textContent = row[column] || '';
-                    }
+                    };
 
                     tableRow.appendChild(td);
                 });
