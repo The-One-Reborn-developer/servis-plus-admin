@@ -18,6 +18,12 @@ Admin panel for the [Servis Plus WebApp](https://github.com/The-One-Reborn-devel
 * [docker](https://www.docker.com/)
 * [docker-compose](https://docs.docker.com/compose/)
 
+## Branches and Environments
+
+* dev (develop)
+* demo (demo)
+* prod (master)
+
 ## Running
 
 ```bash
