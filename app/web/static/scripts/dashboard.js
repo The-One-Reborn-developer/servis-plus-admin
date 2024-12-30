@@ -63,16 +63,20 @@ async function fetchTableData(service, table) {
         const serviceData = document.querySelector('.service-data-content');
         serviceData.innerHTML = '';
 
-        if (response.ok && data.length > 0) {
+        columnOrder = [];
+
+        if (service === 'services' && table === 'users') {
             columnOrder = [
                 'telegram_id',
                 'services_name',
                 'services_role',
                 'rate',
                 'experience',
-                'services_registration_date',
+                'services_registration_date'
             ]
+        };
 
+        if (response.ok && data.length > 0) {
             const tableElement = document.createElement('table');
             tableElement.className = 'data-table';
 
