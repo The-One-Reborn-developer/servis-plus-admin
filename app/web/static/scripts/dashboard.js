@@ -154,6 +154,33 @@ async function fetchTableData(service, table) {
                 'false': 'Нет',
                 'true': 'Да'
             };
+        } else if (service === 'delivery' && table === 'Доставки') {
+            columnOrder = [
+                'id',
+                'customer_telegram_id',
+                'customer_name',
+                'city',
+                'description',
+                'deliver_from',
+                'deliver_to',
+                'closed'
+            ];
+
+            columnTranslations = {
+                'id': 'ID',
+                'customer_telegram_id': 'Телеграм ID заказчика',
+                'customer_name': 'Имя заказчика',
+                'city': 'Город',
+                'description': 'Описание',
+                'deliver_from': 'Дата начала',
+                'deliver_to': 'Дата окончания',
+                'closed': 'Закрыта'
+            };
+
+            cellTranslations = {
+                'true': 'Да',
+                'false': 'Нет'
+            };
         };
 
         if (response.ok && data.length > 0) {
