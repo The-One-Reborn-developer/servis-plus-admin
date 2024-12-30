@@ -63,7 +63,7 @@ async function fetchTableData(service, table) {
         const serviceData = document.querySelector('.service-data-content');
         serviceData.innerHTML = '';
 
-        columnOrder = [];
+        let columnOrder = [];
 
         if (service === 'services' && table === 'users') {
             columnOrder = [
