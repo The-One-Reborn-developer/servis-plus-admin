@@ -102,6 +102,18 @@ async function fetchTableData(service, table) {
                 'instrument_provided',
                 'closed'
             ];
+
+            columnNames = {
+                'id': 'ID',
+                'customer_telegram_id': 'Телеграм ID заказчика',
+                'customer_name': 'Имя заказчика',
+                'city': 'Город',
+                'description': 'Описание',
+                'deadline_from': 'Дата начала',
+                'deadline_to': 'Дата окончания',
+                'instrument_provided': 'Предоставляется инструмент',
+                'closed': 'Закрыта'
+            };
         };
 
         if (response.ok && data.length > 0) {
