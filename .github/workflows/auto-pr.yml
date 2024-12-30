@@ -20,7 +20,7 @@ jobs:
      run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
    - name: create PR
-     uses: peter-evans/create-pull-request@v4
+     uses: peter-evans/create-pull-request@v7
      with:
       branch: develop
       base: master
