@@ -65,6 +65,7 @@ async function fetchTableData(service, table) {
 
         let columnOrder = [];
         let columnNames = {};
+        let roleTranslations = {};
 
         if (service === 'services' && table === 'Пользователи') {
             columnOrder = [
@@ -74,7 +75,7 @@ async function fetchTableData(service, table) {
                 'rate',
                 'experience',
                 'services_registration_date'
-            ]
+            ];
 
             columnNames = {
                 'telegram_id': 'Телеграм ID',
@@ -83,7 +84,12 @@ async function fetchTableData(service, table) {
                 'rate': 'Ставка ₽/час',
                 'experience': 'Опыт (в годах)',
                 'services_registration_date': 'Дата регистрации'
-            }
+            };
+
+            roleTranslations = {
+                'customer': 'Заказчик',
+                'performer': 'Исполнитель'
+            };
         };
 
         if (response.ok && data.length > 0) {
@@ -96,7 +102,7 @@ async function fetchTableData(service, table) {
                 const th = document.createElement('th');
                 th.textContent = columnNames[column] || column;
                 headerRow.appendChild(th);
-            })
+            });
             tableElement.appendChild(headerRow);
 
             data.forEach(row => {
@@ -104,9 +110,15 @@ async function fetchTableData(service, table) {
                 tableRow.className = 'data-table-row';
                 columnOrder.forEach(column => {
                     const td = document.createElement('td');
-                    td.textContent = row[column] || '';
+                    
+                    if (column === 'services_role') {
+                        td.textContent = roleTranslations[row[column]] || row[column];
+                    } else {
+                        td.textContent = row[column] || '';
+                    }
+
                     tableRow.appendChild(td);
-                })
+                });
             tableElement.appendChild(tableRow);
         });
 
