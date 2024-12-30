@@ -59,6 +59,36 @@ async function fetchTableData(service, table) {
     try {
         const response = await fetch(`/dashboard/table?service=${service}&table=${table}`);
         const data = await response.json();
+
+        const serviceData = document.querySelector('.service-data-content');
+        serviceData.innerHTML = '';
+
+        if (response.ok && data.length > 0) {
+            const tableElement = document.createElement('table');
+            tableElement.className = 'data-table';
+
+            const headerRow = document.createElement('tr');
+            Object.keys(data[0]).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            });
+            tableElement.appendChild(headerRow);
+
+            data.forEach(row => {
+                const tableRow = document.createElement('tr');
+                Object.values(row).forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = value;
+                    tableRow.appendChild(td);
+                });
+            tableElement.appendChild(tableRow);
+        });
+
+            serviceData.appendChild(tableElement);
+        } else {
+            serviceData.innerHTML = '<p class="flash-message error">Нет данных для данной таблицы.</p>';
+        }
     } catch (error) {
         console.error('Error fetching table data:', error);
         const serviceData = document.querySelector('.service-data-content');
