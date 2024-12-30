@@ -2,7 +2,7 @@
 
 Admin panel for the [Servis Plus WebApp](https://github.com/The-One-Reborn-developer/servis-plus-dev)
 
-[Dev](https://servisplus-admin-dev.mooo.com/)
+[Dev](https://servisplus-admin-development.mooo.com:10443)
 
 ## Features
 
