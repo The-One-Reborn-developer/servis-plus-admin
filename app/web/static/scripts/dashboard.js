@@ -90,6 +90,18 @@ async function fetchTableData(service, table) {
                 'customer': 'Заказчик',
                 'performer': 'Исполнитель'
             };
+        } else if (service === 'services' && table === 'Заказы') {
+            columnOrder = [
+                'id',
+                'customer_telegram_id',
+                'customer_name',
+                'city',
+                'description',
+                'deadline_from',
+                'deadline_to',
+                'instrument_provided',
+                'closed'
+            ];
         };
 
         if (response.ok && data.length > 0) {
