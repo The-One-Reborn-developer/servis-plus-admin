@@ -64,8 +64,8 @@ async function fetchTableData(service, table) {
         serviceData.innerHTML = '';
 
         let columnOrder = [];
-        let columnNames = {};
-        let roleTranslations = {};
+        let columnTranslations = {};
+        let cellTranslations = {};
 
         if (service === 'services' && table === 'Пользователи') {
             columnOrder = [
@@ -77,7 +77,7 @@ async function fetchTableData(service, table) {
                 'services_registration_date'
             ];
 
-            columnNames = {
+            columnTranslations = {
                 'telegram_id': 'Телеграм ID',
                 'services_name': 'Имя',
                 'services_role': 'Роль',
@@ -86,7 +86,7 @@ async function fetchTableData(service, table) {
                 'services_registration_date': 'Дата регистрации'
             };
 
-            roleTranslations = {
+            cellTranslations = {
                 'customer': 'Заказчик',
                 'performer': 'Исполнитель'
             };
@@ -103,7 +103,7 @@ async function fetchTableData(service, table) {
                 'closed'
             ];
 
-            columnNames = {
+            columnTranslations = {
                 'id': 'ID',
                 'customer_telegram_id': 'Телеграм ID заказчика',
                 'customer_name': 'Имя заказчика',
@@ -113,6 +113,11 @@ async function fetchTableData(service, table) {
                 'deadline_to': 'Дата окончания',
                 'instrument_provided': 'Предоставляется инструмент',
                 'closed': 'Закрыта'
+            };
+
+            cellTranslations = {
+                'true': 'Да',
+                'false': 'Нет'
             };
         };
 
@@ -125,7 +130,7 @@ async function fetchTableData(service, table) {
             columnOrder.forEach(column => {
                 const th = document.createElement('th');
                 th.className = 'data-table-header-cell';
-                th.textContent = columnNames[column] || column;
+                th.textContent = columnTranslations[column] || column;
                 headerRow.appendChild(th);
             });
             tableElement.appendChild(headerRow);
@@ -138,7 +143,7 @@ async function fetchTableData(service, table) {
                     td.className = 'data-table-cell';
                     
                     if (column === 'services_role') {
-                        td.textContent = roleTranslations[row[column]] || row[column];
+                        td.textContent = cellTranslations[row[column]] || row[column];
                     } else {
                         td.textContent = row[column] || '';
                     }
