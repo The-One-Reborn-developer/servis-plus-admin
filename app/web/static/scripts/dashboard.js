@@ -87,6 +87,7 @@ async function fetchTableData(service, table) {
 
             data.forEach(row => {
                 const tableRow = document.createElement('tr');
+                tableRow.className = 'data-table-row';
                 columnOrder.forEach(column => {
                     const td = document.createElement('td');
                     td.textContent = row[column] || '';
