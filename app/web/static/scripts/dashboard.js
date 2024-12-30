@@ -186,7 +186,7 @@ async function fetchTableData(service, table) {
             filteredData.forEach(row => {
                 const tableRow = document.createElement('tr');
                 tableRow.className = 'data-table-row';
-                columnOrder.forEach(column => {
+                displayedColumns.forEach(column => {
                     const td = document.createElement('td');
                     td.className = 'data-table-cell';
                     
