@@ -24,6 +24,12 @@ Admin panel for the [Servis Plus WebApp](https://github.com/The-One-Reborn-devel
 * demo (demo)
 * prod (master)
 
+Setup the .env for branches:
+
+```bash
+sudo bash launchers/git_scripts.sh
+```
+
 ## Running
 
 ```bash
