@@ -8,4 +8,4 @@ def get_bids():
     with sync_session() as session:
         with session.begin():
             bids = session.scalars(select(Bid)).all()
-            return bids
+            return [bid.to_dict() for bid in bids]
