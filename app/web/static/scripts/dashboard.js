@@ -175,7 +175,7 @@ async function fetchTableData(service, table) {
 
             const headerRow = document.createElement('tr');
             headerRow.className = 'data-table-header';
-            columnOrder.forEach(column => {
+            displayedColumns.forEach(column => {
                 const th = document.createElement('th');
                 th.className = 'data-table-header-cell';
                 th.textContent = columnTranslations[column] || column;
