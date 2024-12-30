@@ -167,6 +167,9 @@ async function fetchTableData(service, table) {
                 };
             });
 
+            const excludedColumns = ['registered_in_services', 'registered_in_delivery'];
+            const displayedColumns = columnOrder.filter(column => !excludedColumns.includes(column));
+
             const tableElement = document.createElement('table');
             tableElement.className = 'data-table';
 
