@@ -64,6 +64,15 @@ async function fetchTableData(service, table) {
         serviceData.innerHTML = '';
 
         if (response.ok && data.length > 0) {
+            columnOrder = [
+                'telegram_id',
+                'services_name',
+                'services_role',
+                'rate',
+                'experience',
+                'services_registration_date',
+            ]
+
             const tableElement = document.createElement('table');
             tableElement.className = 'data-table';
 
@@ -77,11 +86,11 @@ async function fetchTableData(service, table) {
 
             data.forEach(row => {
                 const tableRow = document.createElement('tr');
-                Object.values(row).forEach(value => {
+                columnOrder.forEach(column => {
                     const td = document.createElement('td');
-                    td.textContent = value;
+                    td.textContent = row[column] || '';
                     tableRow.appendChild(td);
-                });
+                })
             tableElement.appendChild(tableRow);
         });
 
