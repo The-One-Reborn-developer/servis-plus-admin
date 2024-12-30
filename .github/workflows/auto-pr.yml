@@ -16,9 +16,6 @@ jobs:
    - name: extract git commit data
      uses: rlespinasse/git-commit-data-action@v1.x
 
-   - name: update author info
-     run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
-
    - name: create PR
      uses: peter-evans/create-pull-request@v7
      with:
@@ -27,5 +24,5 @@ jobs:
       committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
       author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
       token: ${{ secrets.GITHUB_TOKEN }}
-      commit-message: "merge: develop into master"
+      commit-message: ${{ env.GIT_COMMIT_MESSAGE }}
       body: "Automatic PR from develop to master"
