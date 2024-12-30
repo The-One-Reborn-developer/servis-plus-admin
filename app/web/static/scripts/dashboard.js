@@ -65,7 +65,7 @@ async function fetchTableData(service, table) {
 
         let columnOrder = [];
 
-        if (service === 'services' && table === 'users') {
+        if (service === 'services' && table === 'Пользователи') {
             columnOrder = [
                 'telegram_id',
                 'services_name',
