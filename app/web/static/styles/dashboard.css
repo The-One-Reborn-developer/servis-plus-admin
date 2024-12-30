@@ -173,6 +173,11 @@ body {
     text-align: center;
 }
 
+.data-table-header-cell,
+.data-table-cell {
+    border-right: 1px solid black;
+}
+
 .flash-messages {
     margin: 10px 0;
     padding: 10px;
