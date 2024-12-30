@@ -59,7 +59,7 @@ async function fetchTableData(service, table) {
     try {
         const response = await fetch(`/dashboard/table?service=${service}&table=${table}`);
         const data = await response.json();
-
+        console.log(data)
         const serviceData = document.querySelector('.service-data-content');
         serviceData.innerHTML = '';
 
@@ -124,6 +124,7 @@ async function fetchTableData(service, table) {
             headerRow.className = 'data-table-header';
             columnOrder.forEach(column => {
                 const th = document.createElement('th');
+                th.className = 'data-table-header-cell';
                 th.textContent = columnNames[column] || column;
                 headerRow.appendChild(th);
             });
@@ -134,6 +135,7 @@ async function fetchTableData(service, table) {
                 tableRow.className = 'data-table-row';
                 columnOrder.forEach(column => {
                     const td = document.createElement('td');
+                    td.className = 'data-table-cell';
                     
                     if (column === 'services_role') {
                         td.textContent = roleTranslations[row[column]] || row[column];
