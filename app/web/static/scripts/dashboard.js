@@ -77,11 +77,11 @@ async function fetchTableData(service, table) {
             tableElement.className = 'data-table';
 
             const headerRow = document.createElement('tr');
-            Object.keys(data[0]).forEach(key => {
+            columnOrder.forEach(column => {
                 const th = document.createElement('th');
-                th.textContent = key;
+                th.textContent = column;
                 headerRow.appendChild(th);
-            });
+            })
             tableElement.appendChild(headerRow);
 
             data.forEach(row => {
