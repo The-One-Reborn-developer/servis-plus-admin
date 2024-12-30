@@ -74,7 +74,8 @@ async function fetchTableData(service, table) {
                 'services_role',
                 'rate',
                 'experience',
-                'services_registration_date'
+                'services_registration_date',
+                'registered_in_services'
             ];
 
             columnTranslations = {
@@ -130,11 +131,42 @@ async function fetchTableData(service, table) {
                 'car_width',
                 'car_length',
                 'car_height',
-                'delivery_registration_date'
+                'delivery_registration_date',
+                'registered_in_delivery'
             ];
+
+            columnTranslations = {
+                'telegram_id': 'Телеграм ID',
+                'delivery_name': 'Имя',
+                'delivery_role': 'Роль',
+                'date_of_birth': 'Дата рождения',
+                'has_car': 'Есть машина',
+                'car_model': 'Модель машины',
+                'car_width': 'Ширина машины',
+                'car_length': 'Длина машины',
+                'car_height': 'Высота машины',
+                'delivery_registration_date': 'Дата регистрации'
+            };
+
+            cellTranslations = {
+                'customer': 'Заказчик',
+                'courier': 'Курьер',
+                'false': 'Нет',
+                'true': 'Да'
+            };
         };
 
         if (response.ok && data.length > 0) {
+            const filteredData = data.filter(row => {
+                if (service === 'services' && table === 'Пользователи') {
+                    return row.registered_in_services === true;
+                } else if (service === 'delivery' && table === 'Пользователи') {
+                    return row.registered_in_delivery === true;
+                } else {
+                    return true;
+                };
+            });
+
             const tableElement = document.createElement('table');
             tableElement.className = 'data-table';
 
@@ -148,7 +180,7 @@ async function fetchTableData(service, table) {
             });
             tableElement.appendChild(headerRow);
 
-            data.forEach(row => {
+            filteredData.forEach(row => {
                 const tableRow = document.createElement('tr');
                 tableRow.className = 'data-table-row';
                 columnOrder.forEach(column => {
