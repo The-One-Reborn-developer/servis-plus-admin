@@ -151,8 +151,8 @@ async function fetchTableData(service, table) {
             cellTranslations = {
                 'customer': 'Заказчик',
                 'courier': 'Курьер',
-                'false': 'Нет',
-                'true': 'Да'
+                'true': 'Да',
+                'false': 'Нет'
             };
         } else if (service === 'delivery' && table === 'Доставки') {
             columnOrder = [
@@ -175,6 +175,25 @@ async function fetchTableData(service, table) {
                 'deliver_from': 'Откуда доставить',
                 'deliver_to': 'Куда доставить',
                 'closed': 'Закрыта'
+            };
+
+            cellTranslations = {
+                'true': 'Да',
+                'false': 'Нет'
+            };
+        } else if (service === 'game' && table === 'Игровые сессии') {
+            columnOrder = [
+                'id',
+                'session_date',
+                'players_amount',
+                'finished'
+            ];
+
+            columnTranslations = {
+                'id': 'ID',
+                'session_date': 'Дата игровой сессии',
+                'players_amount': 'Количество игроков',
+                'finished': 'Сессия завершена'
             };
 
             cellTranslations = {
