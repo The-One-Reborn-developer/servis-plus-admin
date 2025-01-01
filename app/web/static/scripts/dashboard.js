@@ -37,7 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             tableButtons.forEach(btn => btn.classList.remove('selected'));
                             event.target.classList.add('selected');
 
-                            await fetchTableData(service, table.name)
+                            await fetchTableData(service, table.name);
+
+                            if (service === 'game' && table.name === 'Игровые сессии') {
+                                addNewRowForm(serviceContent, service);  
+                            };
                         });
 
                         serviceHeader.appendChild(tableButton);
@@ -273,4 +277,60 @@ async function fetchTableData(service, table) {
         const serviceData = document.querySelector('.service-data-content');
         serviceData.innerHTML = '<p class="flash-message error">Произошла ошибка. Пожалуйста, попробуйте еще раз.</p>';
     };
+};
+
+
+function addNewRowForm(container, service) {
+    // Create a form for adding a new row
+    const form = document.createElement('form');
+    form.className = 'add-row-form';
+    form.innerHTML = `
+        <label for="session-date">Укажите дату игровой сессии:</label>
+        <input type="datetime-local" id="session-date" name="session-date" required />
+        <label for="session-time">Укажите время игровой сессии:</label>
+        <input type="time" id="session-time" name="session-time" required />
+        <button type="submit">Добавить</button>
+    `;
+
+    // Append form to the container
+    container.appendChild(form);
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const sessionDate = form.querySelector('#session-date').value;
+        const sessionTime = form.querySelector('#session-time').value;
+        if (!sessionDate) {
+            alert('Дата игровой сессии обязательна для заполнения.');
+            return;
+        } else if (!sessionTime) {
+            alert('Время игровой сессии обязательно для заполнения.');
+        };
+
+        const formattedSessionDate = new Date(`${sessionDate}T${sessionTime}`).toISOString();
+
+        try {
+            const response = await fetch(`/game/add-session`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    session_date: formattedSessionDate
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert('Игровая сессия успешно добавлена!');
+                await fetchTableData(service, 'Игровые сессии'); // Refresh the table
+            } else {
+                alert(`Ошибка: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error adding new row:', error);
+            alert('Произошла ошибка при добавлении новой строки. Пожалуйста, попробуйте еще раз.');
+        }
+    });
 };
