@@ -182,7 +182,7 @@ body {
     border-right: 1px solid black;
 }
 
-.add-row-form {
+.add-row-form-group {
     display: flex;
     flex-direction: row;
     justify-content: center;
