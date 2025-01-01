@@ -3,7 +3,6 @@ services:
     build:
       context: ..
       dockerfile: dockerfiles/Dockerfile.timer_runner
-    container_name: timer_runner
     restart: always
     environment:
       - LOG_LEVEL=INFO
