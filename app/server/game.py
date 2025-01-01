@@ -49,7 +49,9 @@ def add_session():
             }), 400
 
         game_session = post_game_session(session_date)
-        return jsonify(game_session.to_dict()), 200
+        return jsonify({
+            'message': 'Игровая сессия успешно добавлена'
+        }), 201
     except Exception as e:
         current_app.logger.error(f'Error adding game session: {str(e)}')
         return jsonify({
