@@ -321,11 +321,11 @@ function addNewRowForm(container, service) {
                 alert('Игровая сессия успешно добавлена!');
                 await fetchTableData(service, 'Игровые сессии'); // Refresh the table
             } else {
-                alert(`Ошибка: ${result.message}`);
+                alert(`Ошибка: ${result}`);
             }
         } catch (error) {
             console.error('Error adding new row:', error);
             alert('Произошла ошибка при добавлении новой строки. Пожалуйста, попробуйте еще раз.');
-        }
+        };
     });
 };

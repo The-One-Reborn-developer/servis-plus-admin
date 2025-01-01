@@ -61,7 +61,9 @@ def tables_for_service():
         return jsonify([{'name': table} for table in tables]), 200
     except Exception as e:
         current_app.logger.error(f'Error fetching tables for service {service_name}: {str(e)}')
-        return jsonify({'error': f'Error fetching tables for service {service_name}: {str(e)}'}), 500
+        return jsonify({
+            'error': f'Error fetching tables for service {service_name}: {str(e)}'
+        }), 500
 
 
 @tables_blueprint.get('/table')
@@ -85,12 +87,18 @@ def table_data():
         elif table_name == 'Игровые сессии':
             data = get_game_sessions()
         else:
-            return jsonify({'error': f'Invalid table name provided: {table_name}'}), 400
+            return jsonify({
+                'error': f'Invalid table name provided: {table_name}'
+            }), 400
 
         return jsonify(data), 200
     except ValueError as ve:
         current_app.logger.error(f'Validation error for table {table_name}: {str(ve)}')
-        return jsonify({'error': f'Validation error for table {table_name}: {str(ve)}'}), 400
+        return jsonify({
+            'error': f'Validation error for table {table_name}: {str(ve)}'
+        }), 400
     except Exception as e:
         current_app.logger.error(f'Error fetching data for table {table_name}: {str(e)}')
-        return jsonify({'error': f'Error fetching data for table {table_name}: {str(e)}'}), 500
+        return jsonify({
+            'error': f'Error fetching data for table {table_name}: {str(e)}'
+        }), 500
