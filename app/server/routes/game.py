@@ -42,7 +42,7 @@ def add_session():
         data = request.get_json()
         session_date = data.get('session_date')
         countdown_timer = data.get('countdown_timer')
-
+        current_app.logger.info(f'Adding game session: {session_date}')
         if not session_date:
             return jsonify({
                 'success': False,
