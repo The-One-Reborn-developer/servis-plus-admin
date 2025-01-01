@@ -1,6 +1,6 @@
 import logging
 
-from sqlalchemy import select
+from sqlalchemy import select, or_
 
 from app.database.models.sync_session import sync_session
 from app.database.models.game_session import GameSession
@@ -9,11 +9,16 @@ from app.database.models.game_session import GameSession
 def get_pending_game_sessions():
     '''
     Get all sessions that are not started and not finished
+    or started but not finished
     '''
     with sync_session() as session:
         with session.begin():
             game_sessions = session.scalars(
-                select(GameSession).where(GameSession.started == False, GameSession.finished == False)
+                select(GameSession).where(
+                    or_(GameSession.started == False,
+                        GameSession.started == True, GameSession.finished == False
+                    )
+                )
             ).all()
 
             logging.info(f"Found {len(game_sessions)} pending game sessions")
