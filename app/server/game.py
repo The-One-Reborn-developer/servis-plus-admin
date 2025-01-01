@@ -31,8 +31,8 @@ game_blueprint = Blueprint(
 )
 
 
-@game_blueprint.post('/add-game-session')
-def add_game_session():
+@game_blueprint.post('/add-session')
+def add_session():
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin.login'))
 
