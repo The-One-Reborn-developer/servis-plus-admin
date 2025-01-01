@@ -14,7 +14,7 @@ from app.database.queries.update_game_session import update_game_session
 def timer_worker():
     while True:
         try:
-            now = datetime.now(timezone.utc)
+            now = datetime.now(timezone('Europe/Moscow'))
             sessions = get_pending_game_sessions()
             next_event_time = None
 
