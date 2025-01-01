@@ -7,14 +7,19 @@ from datetime import (
     timezone
 )
 
+from zoneinfo import ZoneInfo
+
 from app.database.queries.get_pending_game_sessions import get_pending_game_sessions
 from app.database.queries.update_game_session import update_game_session
+
+
+MOSCOW_TIMEZONE = ZoneInfo('Europe/Moscow')
 
 
 def timer_worker():
     while True:
         try:
-            now = datetime.now(timezone('Europe/Moscow'))
+            now = datetime.now(MOSCOW_TIMEZONE)
             sessions = get_pending_game_sessions()
             next_event_time = None
 
@@ -24,7 +29,7 @@ def timer_worker():
                 continue
 
             for session in sessions:
-                session_date = datetime.fromisoformat(session['session_date']).replace(tzinfo=timezone.utc)
+                session_date = datetime.fromisoformat(session['session_date']).replace(tzinfo=MOSCOW_TIMEZONE)
                 end_time = session_date + timedelta(minutes=session['countdown_timer'])
                 logging.info(f"Checking game session {session['id']} with date: {session['session_date']}. now: {now}. end_time: {end_time}")
                 # If session hasn't started and it's time to start
