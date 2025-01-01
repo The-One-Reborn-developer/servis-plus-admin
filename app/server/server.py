@@ -9,6 +9,7 @@ from dotenv import (
 
 from app.server.admin import admin_blueprint
 from app.server.tables import tables_blueprint
+from app.server.game import game_blueprint
 
 
 load_dotenv(find_dotenv())
@@ -25,6 +26,7 @@ app = Flask(
 app.secret_key = os.getenv('SECRET_KEY')
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(tables_blueprint, url_prefix='/dashboard')
+app.register_blueprint(game_blueprint, url_prefix='/game')
 
 
 @app.route('/favicon.ico')
