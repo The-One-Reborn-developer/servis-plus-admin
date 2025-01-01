@@ -41,6 +41,7 @@ def add_session():
 
         data = request.get_json()
         session_date = data.get('session_date')
+        countdown_timer = data.get('countdown_timer')
 
         if not session_date:
             return jsonify({
@@ -48,7 +49,7 @@ def add_session():
                 'message': 'Дата игровой сессии обязательна для заполнения.'
             }), 400
 
-        game_session = post_game_session(session_date)
+        post_game_session(session_date, countdown_timer)
         return jsonify({
             'success': True,
             'message': 'Игровая сессия успешно добавлена'

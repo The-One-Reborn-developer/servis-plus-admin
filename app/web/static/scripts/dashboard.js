@@ -288,6 +288,8 @@ function addNewRowForm(container, service) {
         <div class="add-row-form-group">
             <label for="session-date">Укажите дату и время новой игровой сессии:</label>
             <input type="datetime-local" class="add-row-form-input" id="session-date" name="session-date" required />
+            <label for="countdown-timer">Укажите количество минут до начала игровой сессии:</label>
+            <input type="number" class="add-row-form-input" id="countdown-timer" name="countdown-timer" required />
             <button type="submit" class="submit-form-button">Добавить</button>
         </div>
     `;
@@ -299,8 +301,9 @@ function addNewRowForm(container, service) {
         event.preventDefault();
 
         const sessionDate = form.querySelector('#session-date').value;
-        if (!sessionDate) {
-            alert('Дата игровой сессии обязательна для заполнения.');
+        const countdownTimer = form.querySelector('#countdown-timer').value;
+        if (!sessionDate || !countdownTimer) {
+            alert('Пожалуйста, заполните все поля.');
             return;
         };
 
@@ -311,7 +314,8 @@ function addNewRowForm(container, service) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    session_date: sessionDate
+                    session_date: sessionDate,
+                    countdown_timer: countdownTimer
                 })
             });
 
