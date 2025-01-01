@@ -300,12 +300,9 @@ function addNewRowForm(container, service) {
         event.preventDefault();
 
         const sessionDate = form.querySelector('#session-date').value;
-        const sessionTime = form.querySelector('#session-time').value;
         if (!sessionDate) {
             alert('Дата игровой сессии обязательна для заполнения.');
             return;
-        } else if (!sessionTime) {
-            alert('Время игровой сессии обязательно для заполнения.');
         };
 
         const formattedSessionDate = new Date(`${sessionDate}T${sessionTime}`).toISOString();
