@@ -40,5 +40,5 @@ def add_session():
 
     return jsonify({
         'session_date': session_date,
-        'type': type(session_date)
+        'type': str(type(session_date))
     }), 200
