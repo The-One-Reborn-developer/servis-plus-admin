@@ -43,7 +43,7 @@ def timer_worker():
             next_check = 1
             if next_event_time:
                 next_check = max(1, (next_event_time - now).total_seconds())
-            time.sleep(60)
-            #time.sleep(next_check)
+
+            time.sleep(next_check)
         except Exception as e:
             logging.exception(f"Error in timer worker: {str(e)}")
