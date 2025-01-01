@@ -9,4 +9,4 @@ sudo docker-compose -p demo_timer_runner -f dockerfiles/docker-compose-timer-run
 sudo docker-compose -p demo_timer_runner -f dockerfiles/docker-compose-timer-runner-demo.yml build
 
 # Bring up the demo_timer_runner environment
-sudo docker-compose -p demo_timer_runner -f dockerfiles/docker-compose-timer-runner-demo.yml up
+sudo docker-compose -p demo_timer_runner -f dockerfiles/docker-compose-timer-runner-demo.yml up -d
