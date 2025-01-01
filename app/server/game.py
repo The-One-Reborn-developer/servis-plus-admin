@@ -15,6 +15,8 @@ from flask import (
     jsonify
 )
 
+from app.database.queries.post_game_session import post_game_session
+
 
 load_dotenv(find_dotenv())
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -33,13 +35,23 @@ game_blueprint = Blueprint(
 
 @game_blueprint.post('/add-session')
 def add_session():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin.login'))
+    try:
+        if not session.get('admin_logged_in'):
+            return redirect(url_for('admin.login'))
 
-    data = request.get_json()
-    session_date = data.get('session_date')
-    current_app.logger.info(f'Adding new game session: {session_date}')
-    return jsonify({
-        'session_date': session_date,
-        'type': str(type(session_date))
-    }), 200
+        data = request.get_json()
+        session_date = data.get('session_date')
+
+        if not session_date:
+            return jsonify({
+                'error': 'Session date not provided',
+                'message': 'Дата игровой сессии обязательна для заполнения.'
+            }), 400
+
+        game_session = post_game_session(session_date)
+        return jsonify(game_session.to_dict()), 200
+    except Exception as e:
+        current_app.logger.error(f'Error adding game session: {str(e)}')
+        return jsonify({
+            'error': f'Error adding game session: {str(e)}'
+        }), 500
