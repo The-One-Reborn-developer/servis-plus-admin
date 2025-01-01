@@ -37,7 +37,7 @@ def add_session():
         return redirect(url_for('admin.login'))
 
     session_date = request.form.get('session-date')
-    print(f'session_date: {session_date}')
+    current_app.logger.info(f'session_date: {session_date}')
     return jsonify({
         'session_date': session_date,
         'type': str(type(session_date))
