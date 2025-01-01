@@ -254,8 +254,8 @@ async function fetchTableData(service, table) {
                         const booleanValue = row[column] === true ? 'true' : 'false';
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
                     } else if (column === 'session_date') {
-                        const date = new Date(row[column]).toISOString().split('T')[0];
-                        const time = new Date(row[column]).toISOString().split('T')[1].split('.')[0];
+                        const date = new Date(row[column]).split('T')[0];
+                        const time = new Date(row[column]).split('T')[1].split('.')[0];
                         td.textContent = `${date} ${time}`;
                     } else if (column === 'finished') {
                         const booleanValue = row[column] === true ? 'true' : 'false';
