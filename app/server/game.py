@@ -38,4 +38,7 @@ def add_session():
 
     session_date = request.form.get('session-date')
 
-    print(session_date, type(session_date))
+    return jsonify({
+        'session_date': session_date,
+        'type': type(session_date)
+    }), 200
