@@ -285,7 +285,7 @@ function addNewRowForm(container, service) {
     const form = document.createElement('form');
     form.className = 'add-row-form';
     form.innerHTML = `
-        <h6>Добавить новую игровую сессию</h6>
+        <h3 class="add-row-form-header">Добавить новую игровую сессию</h3>
         <div class="add-row-form-group">
             <label for="session-date">Укажите дату и время игровой сессии:</label>
             <input type="datetime-local" id="session-date" name="session-date" required />

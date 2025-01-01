@@ -182,7 +182,14 @@ body {
     border-right: 1px solid black;
 }
 
-.add-row-form-group {
+.add-row-form-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-row-form {
     display: flex;
     flex-direction: row;
     justify-content: center;
