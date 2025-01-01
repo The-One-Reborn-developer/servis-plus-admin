@@ -303,7 +303,7 @@ function addNewRowForm(container, service) {
             alert('Дата игровой сессии обязательна для заполнения.');
             return;
         };
-
+        console.log(sessionDate);
         try {
             const response = await fetch(`/game/add-session`, {
                 method: 'POST',
