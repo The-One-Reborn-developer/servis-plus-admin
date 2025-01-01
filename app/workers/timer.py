@@ -22,7 +22,7 @@ def timer_worker():
             now = datetime.now(MOSCOW_TIMEZONE)
             sessions = get_pending_game_sessions()
             next_event_time = None
-            logging.info(f"Checking session {session['id']}: Now: {now}, Start: {session_date}, End: {end_time}")
+            
             if not sessions:
                 logging.info("No game sessions to check")
                 time.sleep(60)
@@ -31,7 +31,7 @@ def timer_worker():
             for session in sessions:
                 session_date = datetime.fromisoformat(session['session_date']).astimezone(MOSCOW_TIMEZONE)
                 end_time = session_date + timedelta(minutes=session['countdown_timer'])
-                
+                logging.info(f"Checking session {session['id']}: Now: {now}, Start: {session_date}, End: {end_time}")
                 # If session hasn't started and it's time to start
                 if not session['started'] and session_date <= now <= end_time:
                     update_game_session(session['id'], 'started')
