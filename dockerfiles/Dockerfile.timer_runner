@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["python", "app", "runners", "timer_runner.py"]
+CMD ["python", "app/runners/timer_runner.py"]
