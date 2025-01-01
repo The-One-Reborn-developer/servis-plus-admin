@@ -44,16 +44,18 @@ def add_session():
 
         if not session_date:
             return jsonify({
-                'error': 'Session date not provided',
+                'success': False,
                 'message': 'Дата игровой сессии обязательна для заполнения.'
             }), 400
 
         game_session = post_game_session(session_date)
         return jsonify({
+            'success': True,
             'message': 'Игровая сессия успешно добавлена'
         }), 201
     except Exception as e:
         current_app.logger.error(f'Error adding game session: {str(e)}')
         return jsonify({
-            'error': f'Error adding game session: {str(e)}'
+            'success': False,
+            'message': 'Ошибка при добавлении игровой сессии'
         }), 500

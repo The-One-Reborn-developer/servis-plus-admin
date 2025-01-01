@@ -318,7 +318,6 @@ function addNewRowForm(container, service) {
             const result = await response.json();
             console.log(result)
             if (result.success) {
-                alert('Игровая сессия успешно добавлена!');
                 await fetchTableData(service, 'Игровые сессии'); // Refresh the table
             } else {
                 alert(`Ошибка: ${result.message}`);
