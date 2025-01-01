@@ -285,11 +285,10 @@ function addNewRowForm(container, service) {
     const form = document.createElement('form');
     form.className = 'add-row-form';
     form.innerHTML = `
-        <label for="session-date">Укажите дату игровой сессии:</label>
+        <h2>Добавить новую игровую сессию</h2>
+        <label for="session-date">Укажите дату и время игровой сессии:</label>
         <input type="datetime-local" id="session-date" name="session-date" required />
-        <label for="session-time">Укажите время игровой сессии:</label>
-        <input type="time" id="session-time" name="session-time" required />
-        <button type="submit">Добавить</button>
+        <button type="submit" class="submit-form-button">Добавить</button>
     `;
 
     // Append form to the container

@@ -98,7 +98,8 @@ body {
 	background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.table-select-button {
+.table-select-button,
+.submit-form-button {
     width: 20%;
     border-radius: 10px;
 	border: solid 2px grey;
@@ -115,20 +116,23 @@ body {
 }
 
 .service-select-button:hover,
-.table-select-button:hover {
+.table-select-button:hover,
+.submit-form-button:hover {
     background: #C9D6FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
 }
 
 .service-select-button.selected:hover,
-.table-select-button.selected:hover {
+.table-select-button.selected:hover,
+.submit-form-button.selected:hover {
     background: #4e54c8;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .service-select-button:active,
-.table-select-button:active {
+.table-select-button:active,
+.submit-form-button:active {
     background: #667db6;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -176,6 +180,20 @@ body {
 .data-table-header-cell,
 .data-table-cell {
     border-right: 1px solid black;
+}
+
+.add-row-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #8e9eab;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: 2px solid black;
+    margin: 2%;
+    border-radius: 10px;
+    padding: 1%;
 }
 
 .flash-messages {
