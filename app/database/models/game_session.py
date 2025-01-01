@@ -10,6 +10,7 @@ class GameSession(Base):
     session_date: Mapped[str] = mapped_column(Text, nullable=False)
     players_amount: Mapped[int] = mapped_column(Integer, nullable=True)
     countdown_timer: Mapped[int] = mapped_column(Integer, nullable=False)
+    started: Mapped[bool] = mapped_column(Boolean, default=False)
     finished: Mapped[bool] = mapped_column(Boolean, default=False)
 
     def to_dict(self):

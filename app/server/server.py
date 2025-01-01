@@ -8,9 +8,9 @@ from dotenv import (
     find_dotenv
 )
 
-from app.server.admin import admin_blueprint
-from app.server.tables import tables_blueprint
-from app.server.game import game_blueprint
+from app.server.routes.admin import admin_blueprint
+from app.server.routes.tables import tables_blueprint
+from app.server.routes.game import game_blueprint
 
 
 load_dotenv(find_dotenv())
