@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 sudo docker-compose -p dev_timer_runner -f dockerfiles/docker-compose-timer-runner-dev.yml down -v
 
 # Build the dev_timer_runner images
-sudo docker-compose -p dev_timer_runner -f dockerfiles/docker-compose-timer-runner-dev.yml build --no-cache
+sudo docker-compose -p dev_timer_runner -f dockerfiles/docker-compose-timer-runner-dev.yml build
 
 # Bring up the dev_timer_runner environment
 sudo docker-compose -p dev_timer_runner -f dockerfiles/docker-compose-timer-runner-dev.yml up
