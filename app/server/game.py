@@ -36,8 +36,9 @@ def add_session():
     if not session.get('admin_logged_in'):
         return redirect(url_for('admin.login'))
 
-    session_date = request.form.get('session-date')
-    current_app.logger.info(f'session_date: {session_date}')
+    data = request.get_json()
+    session_date = data.get('session-date')
+
     return jsonify({
         'session_date': session_date,
         'type': str(type(session_date))
