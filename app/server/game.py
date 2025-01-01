@@ -38,7 +38,7 @@ def add_session():
 
     data = request.get_json()
     session_date = data.get('session-date')
-
+    current_app.logger.info(f'Adding new game session: {session_date}')
     return jsonify({
         'session_date': session_date,
         'type': str(type(session_date))
