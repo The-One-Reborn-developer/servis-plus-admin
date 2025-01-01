@@ -1,5 +1,6 @@
 import time
 import logging
+import pytz
 
 from datetime import datetime, timedelta
 
@@ -10,7 +11,7 @@ from app.database.queries.update_game_session import update_game_session
 def timer_worker():
     while True:
         try:
-            now = datetime.now()
+            now = datetime.now(pytz.timezone('Europe/Moscow'))
             sessions = get_pending_game_sessions()
             next_event_time = None
 
