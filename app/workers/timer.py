@@ -29,7 +29,7 @@ def timer_worker():
                 continue
 
             for session in sessions:
-                session_date = datetime.fromisoformat(session['session_date']).astimezone(MOSCOW_TIMEZONE)
+                session_date = datetime.fromisoformat(session['session_date']).replace(tzinfo=MOSCOW_TIMEZONE)
                 end_time = session_date + timedelta(minutes=session['countdown_timer'])
                 logging.info(f"Checking session {session['id']}: Now: {now}, Start: {session_date}, End: {end_time}")
                 # If session hasn't started and it's time to start
