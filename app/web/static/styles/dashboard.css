@@ -199,6 +199,17 @@ body {
     padding: 1%;
 }
 
+.add-row-form-input {
+    margin: 0 2% 0 2%;
+}
+
+.add-row-form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .flash-messages {
     margin: 10px 0;
     padding: 10px;

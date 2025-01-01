@@ -288,7 +288,7 @@ function addNewRowForm(container, service) {
         <h3 class="add-row-form-header">Добавить новую игровую сессию</h3>
         <div class="add-row-form-group">
             <label for="session-date">Укажите дату и время новой игровой сессии:</label>
-            <input type="datetime-local" id="session-date" name="session-date" required />
+            <input type="datetime-local" class="add-row-form-input" id="session-date" name="session-date" required />
             <button type="submit" class="submit-form-button">Добавить</button>
         </div>
     `;
