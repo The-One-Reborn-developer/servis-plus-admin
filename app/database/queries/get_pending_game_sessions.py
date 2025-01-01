@@ -18,10 +18,6 @@ def get_pending_game_sessions():
 
             logging.info(f"Found {len(game_sessions)} pending game sessions")
             for game_session in game_sessions:
-                logging.info(f"Session ID: {game_session.id},
-                             Session Date: {game_session.session_date},
-                             Countdown Timer: {game_session.countdown_timer},
-                             Started: {game_session.started},
-                             Finished: {game_session.finished}")
+                logging.info(f"Session ID: {game_session.id}, Session Date: {game_session.session_date}, Started: {game_session.started}, Finished: {game_session.finished}")
 
             return [game_session.to_dict() for game_session in game_sessions]
