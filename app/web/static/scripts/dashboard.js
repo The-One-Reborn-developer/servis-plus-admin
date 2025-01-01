@@ -254,9 +254,20 @@ async function fetchTableData(service, table) {
                         const booleanValue = row[column] === true ? 'true' : 'false';
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
                     } else if (column === 'session_date') {
-                        const date = new Date(row[column]).toLocaleString('ru-RU').split('T')[0];
-                        const time = new Date(row[column]).toLocaleString('ru-RU').split('T')[1].split('.')[0];
-                        td.textContent = `${date} ${time}`;
+                        const dateObject = new Date(row[column]);
+
+                        const formattedDate = dateObject.toLocaleDateString('ru-RU', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                        });
+
+                        const formattedTime = dateObject.toLocaleTimeString('ru-RU', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+
+                        td.textContent = `${formattedDate} ${formattedTime}`;
                     } else if (column === 'finished') {
                         const booleanValue = row[column] === true ? 'true' : 'false';
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
