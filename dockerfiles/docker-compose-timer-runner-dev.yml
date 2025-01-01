@@ -6,3 +6,4 @@ services:
     restart: always
     environment:
       - LOG_LEVEL=INFO
+      - PYTHONPATH=/app/app
