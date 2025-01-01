@@ -18,6 +18,7 @@ from flask import (
 from app.database.queries.get_users import get_users
 from app.database.queries.get_bids import get_bids
 from app.database.queries.get_deliveries import get_deliveries
+from app.database.queries.get_game_sessions import get_game_sessions
 
 
 load_dotenv(find_dotenv())
@@ -81,6 +82,8 @@ def table_data():
             data = get_bids()
         elif table_name == 'Доставки':
             data = get_deliveries()
+        elif table_name == 'Игровые сессии':
+            data = get_game_sessions()
         else:
             return jsonify({'error': f'Invalid table name provided: {table_name}'}), 400
 
