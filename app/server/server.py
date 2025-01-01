@@ -1,4 +1,5 @@
 import os
+import logging
 
 from flask import Flask
 
@@ -7,8 +8,9 @@ from dotenv import (
     find_dotenv
 )
 
-from app.server.admin import admin_blueprint
-from app.server.tables import tables_blueprint
+from app.server.routes.admin import admin_blueprint
+from app.server.routes.tables import tables_blueprint
+from app.server.routes.game import game_blueprint
 
 
 load_dotenv(find_dotenv())
@@ -25,6 +27,14 @@ app = Flask(
 app.secret_key = os.getenv('SECRET_KEY')
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(tables_blueprint, url_prefix='/dashboard')
+app.register_blueprint(game_blueprint, url_prefix='/game')
+
+app.logger.setLevel(logging.INFO)
+handler = logging.StreamHandler()
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('[%(asctime)s] %(levelname)s in %(module)s: %(message)s')
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
 
 
 @app.route('/favicon.ico')

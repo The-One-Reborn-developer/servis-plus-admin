@@ -31,6 +31,14 @@ def get_users(service_name):
             User.registered_in_delivery,
             User.delivery_registration_date
         ]
+    elif service_name == 'game':
+        fields = [
+            User.telegram_id,
+            User.game_name,
+            User.game_wallet,
+            User.registered_in_game,
+            User.game_registration_date
+        ]
 
     if not fields:
         raise ValueError(f'Invalid service name: {service_name}')
