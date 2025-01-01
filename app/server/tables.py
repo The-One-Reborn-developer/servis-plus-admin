@@ -48,7 +48,8 @@ def tables_for_service():
     try:
         service_tables = {
             'services': ['Пользователи', 'Заказы'],
-            'delivery': ['Пользователи', 'Доставки']
+            'delivery': ['Пользователи', 'Доставки'],
+            'game': ['Игровые сессии']
         }
 
         tables = service_tables.get(service_name, [])
