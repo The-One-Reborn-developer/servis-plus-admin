@@ -59,7 +59,7 @@ async function fetchTableData(service, table) {
     try {
         const response = await fetch(`/dashboard/table?service=${service}&table=${table}`);
         const data = await response.json();
-        console.log(data)
+
         const serviceData = document.querySelector('.service-data-content');
         serviceData.innerHTML = '';
 
@@ -248,6 +248,10 @@ async function fetchTableData(service, table) {
                     } else if (column === 'has_car') {
                         const booleanValue = row[column] === true ? 'true' : 'false';
                         td.textContent = cellTranslations[booleanValue] || booleanValue;
+                    } else if (column === 'session_date') {
+                        const date = new Date(row[column]).toISOString().split('T')[0];
+                        const time = new Date(row[column]).toISOString().split('T')[1].split('.')[0];
+                        td.textContent = `${date} ${time}`;
                     } else {
                         td.textContent = row[column] || '';
                     };
@@ -260,7 +264,7 @@ async function fetchTableData(service, table) {
             serviceData.appendChild(tableElement);
         } else {
             serviceData.innerHTML = '<p class="flash-message error">Нет данных для данной таблицы.</p>';
-        }
+        };
     } catch (error) {
         console.error('Error fetching table data:', error);
         const serviceData = document.querySelector('.service-data-content');
