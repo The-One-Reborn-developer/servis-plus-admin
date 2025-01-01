@@ -22,7 +22,7 @@ def timer_worker():
             for session in sessions:
                 session_date = datetime.fromisoformat(session['session_date'])
                 end_time = session_date + timedelta(minutes=session['countdown_timer'])
-
+                logging.info(f"Checking game session {session['id']} with date: {session['session_date']}. now: {now}. end_time: {end_time}")
                 # If session hasn't started and it's time to start
                 if not session['started'] and session_date <= now <= end_time:
                     update_game_session(session['id'], 'started')

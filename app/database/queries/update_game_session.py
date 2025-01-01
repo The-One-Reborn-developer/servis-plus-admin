@@ -1,3 +1,5 @@
+import logging
+
 from sqlalchemy import update
 
 from app.database.models.game_session import GameSession
@@ -13,3 +15,5 @@ def update_game_session(game_session_id, status):
                 session.execute(update(GameSession).where(GameSession.id == game_session_id).values(started=True))
             elif status == 'finished':
                 session.execute(update(GameSession).where(GameSession.id == game_session_id).values(finished=True))
+
+            logging.info(f"Game session {game_session_id} has been updated to {status}=True")
