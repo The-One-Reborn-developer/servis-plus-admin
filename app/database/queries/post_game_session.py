@@ -7,5 +7,6 @@ def post_game_session(session_date):
         with session.begin():
             game_session = GameSession(session_date=session_date)
             session.add(game_session)
-
+            session.flush()
+            session.refresh(game_session)
             return game_session
