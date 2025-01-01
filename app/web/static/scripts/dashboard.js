@@ -190,6 +190,7 @@ async function fetchTableData(service, table) {
                 'id',
                 'session_date',
                 'players_amount',
+                'countdown_timer',
                 'finished'
             ];
 
@@ -197,6 +198,7 @@ async function fetchTableData(service, table) {
                 'id': 'ID',
                 'session_date': 'Дата игровой сессии',
                 'players_amount': 'Количество игроков',
+                'countdown_timer': 'Таймер до начала (минут)',
                 'finished': 'Сессия завершена'
             };
 
