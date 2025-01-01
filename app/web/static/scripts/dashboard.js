@@ -305,8 +305,6 @@ function addNewRowForm(container, service) {
             return;
         };
 
-        const formattedSessionDate = new Date(`${sessionDate}T${sessionTime}`).toISOString();
-
         try {
             const response = await fetch(`/game/add-session`, {
                 method: 'POST',
@@ -314,7 +312,7 @@ function addNewRowForm(container, service) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    session_date: formattedSessionDate
+                    session_date: sessionDate
                 })
             });
 
