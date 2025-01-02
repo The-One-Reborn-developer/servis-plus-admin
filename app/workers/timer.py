@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 from app.database.queries.get_pending_game_sessions import get_pending_game_sessions
 from app.database.queries.update_game_session import update_game_session
+from app.database.queries.get_game_session import get_game_session
 
 
 MOSCOW_TIMEZONE = ZoneInfo('Europe/Moscow')
@@ -38,7 +39,9 @@ def timer_worker():
                     logging.info(f"Game session {session['id']} has started")
                 # If session has started but not finished and timer has run out
                 elif session['started'] and (end_time - timedelta(seconds=MARGIN_SECONDS)) <= now:
-                    update_game_session(session['id'], 'finished')
+                    players_amount = get_game_session(session['id'])['players_amount']
+
+                    update_game_session(session['id'], 'finished', players_amount)
                     logging.info(f"Game session {session['id']} has finished")
                 # Determine the nearest next event time
                 if not session['started']:
