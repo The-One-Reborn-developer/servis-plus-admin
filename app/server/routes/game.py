@@ -55,7 +55,7 @@ def add_session():
             'message': 'Игровая сессия успешно добавлена'
         }), 201
     except Exception as e:
-        current_app.logger.error(f'Error adding game session: {str(e)}')
+        current_app.logger.error(f'Error adding game session: {str(e)}', exc_info=True)
         return jsonify({
             'success': False,
             'message': 'Ошибка при добавлении игровой сессии'
