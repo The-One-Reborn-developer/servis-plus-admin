@@ -4,7 +4,7 @@ from app.database.models.game_session import GameSession
 from app.database.models.sync_session import sync_session
 
 
-def get_game_sessions():
+def get_game_sessions() -> list:
     with sync_session() as session:
         with session.begin():
             game_sessions = session.scalars(select(GameSession)).all()

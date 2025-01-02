@@ -4,7 +4,7 @@ from app.database.models.user import User
 from app.database.models.sync_session import sync_session
 
 
-def get_users(service_name):
+def get_users(service_name) -> list:
     fields = []
     
     if service_name == 'services':

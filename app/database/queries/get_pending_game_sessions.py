@@ -6,7 +6,7 @@ from app.database.models.sync_session import sync_session
 from app.database.models.game_session import GameSession
 
 
-def get_pending_game_sessions():
+def get_pending_game_sessions() -> list:
     '''
     Get all sessions that are not started and not finished
     or started but not finished
