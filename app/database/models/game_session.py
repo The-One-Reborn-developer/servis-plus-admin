@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, BigInteger, String, Text, Boolean
+from sqlalchemy import Integer, Text, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.database.models.base import Base
