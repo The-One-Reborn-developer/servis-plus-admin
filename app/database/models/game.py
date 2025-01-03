@@ -5,6 +5,7 @@ from app.database.models.base import Base
 
 
 class Game(Base):
+    __tablename__ = 'games'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     game_started: Mapped[bool] = mapped_column(Boolean, default=False)
     game_finished: Mapped[bool] = mapped_column(Boolean, default=False)
