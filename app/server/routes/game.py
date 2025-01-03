@@ -15,7 +15,7 @@ from flask import (
     jsonify
 )
 
-from app.database.queries.post_game_session import post_game_session
+from app.database.queries.insert_game_session import insert_game_session
 
 
 load_dotenv(find_dotenv())
@@ -49,7 +49,7 @@ def add_session():
                 'message': 'Дата игровой сессии обязательна для заполнения.'
             }), 400
 
-        post_game_session(session_date, countdown_timer)
+        insert_game_session(session_date, countdown_timer)
         return jsonify({
             'success': True,
             'message': 'Игровая сессия успешно добавлена'
