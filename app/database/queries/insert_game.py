@@ -10,3 +10,5 @@ def insert_game(session_id):
                 round_number=1
             )
             session.add(new_game)
+
+            return new_game.id
