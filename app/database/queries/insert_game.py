@@ -10,5 +10,5 @@ def insert_game(session_id):
                 round_number=1
             )
             session.add(new_game)
-
+            session.flush()
             return new_game.id

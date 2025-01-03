@@ -17,7 +17,7 @@ def pair_players_for_game_session(session_id):
 
         # Create a new game entry for round 1
         game_id = insert_game(session_id)
-
+        logging.info(f"Created game {game_id} for session {session_id}")
         # Generate pairs and insert into game_pairs
         pairs = []
         for i in range(0, len(players) - 1, 2):
