@@ -27,7 +27,7 @@ def timer_worker():
             
             if not sessions:
                 logging.info("No game sessions to check")
-                time.sleep(60)
+                time.sleep(10)
                 continue
 
             for session in sessions:
@@ -56,7 +56,7 @@ def timer_worker():
             # Compute the next interval
             next_check = 1
             if next_event_time:
-                next_check = max(0.1, (next_event_time - now).total_seconds())
+                next_check = max(1, (next_event_time - now).total_seconds())
 
             time.sleep(next_check)
         except Exception as e:
