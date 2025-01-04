@@ -35,7 +35,7 @@ def tables_for_service():
             'services': ['Пользователи', 'Заказы'],
             'delivery': ['Пользователи', 'Доставки'],
             'game': ['Игровые сессии'],
-            'ads': ['Видео']
+            'ads': ['Материалы для игровой сессии']
         }
 
         tables = service_tables.get(service_name, [])

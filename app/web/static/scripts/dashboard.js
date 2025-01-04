@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             tableButtons.forEach(btn => btn.classList.remove('selected'));
                             event.target.classList.add('selected');
                             
-                            if (service === 'ads' && table.name === 'Видео') {
-                                displayVideoForm();
+                            if (service === 'ads' && table.name === 'Материалы для игровой сессии') {
+                                await displayGameSessions();
                                 return;
                             }
                             
@@ -65,7 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function displayVideoForm() {
+async function displayGameSessions() {
+    await fetchTableData('game', 'Игровые сессии');
+};
+
+
+function displayVideoUploadForm() {
     const videoUploadForm = document.createElement('form');
     videoUploadForm.innerHTML = `
         <h3 class="add-row-form-header">Загрузить новое видео</h3>

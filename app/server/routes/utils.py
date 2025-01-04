@@ -11,7 +11,6 @@ from flask import (
     Blueprint,
     current_app,
     request,
-    url_for,
     jsonify
 )
 
