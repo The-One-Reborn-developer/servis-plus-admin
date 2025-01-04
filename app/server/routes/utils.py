@@ -33,7 +33,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@utils_blueprint.post('/video-upload')
+@utils_blueprint.post('/upload-video')
 def upload_video():
     if 'video-url' not in request.files:
         return jsonify({
