@@ -18,9 +18,8 @@ from app.database.queries.insert_game_session_ad import insert_game_session_ad
 
 
 load_dotenv(find_dotenv())
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.join(PROJECT_ROOT, '..', '..')
-ADS_UPLOAD_DIR = os.path.join(BASE_DIR, 'videos', 'ads')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ADS_UPLOAD_DIR = os.path.join(PROJECT_ROOT, 'videos', 'ads')
 ALLOWED_EXTENSIONS = {'mp4', 'mkv', 'mov', 'avi', 'wmv'}
 
 
