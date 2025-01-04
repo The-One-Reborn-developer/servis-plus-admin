@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             event.target.classList.add('selected');
                             
                             if (service === 'ads' && table.name === 'Материалы для игровой сессии') {
+                                console.log('Fetching game sessions...');
                                 await displayGameSessions();
                                 return;
                             }
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function displayGameSessions() {
+    console.log('Executing displayGameSessions...');
     await fetchTableData('game', 'Игровые сессии');
 };
 
