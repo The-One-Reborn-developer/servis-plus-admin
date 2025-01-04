@@ -102,7 +102,13 @@ function displayVideoForm() {
 
             const uploadStatus = document.createElement('p');
             uploadStatus.className = 'flash-message';
-            uploadStatus.textContent = result.message;
+
+            if (result.success) {
+                uploadStatus.textContent = result.message + ' ' + result.filepath;
+            } else {
+                uploadStatus.className = 'flash-message error';
+                uploadStatus.textContent = result.message;
+            };
 
             document.querySelector('.service-data-content').appendChild(uploadStatus);
         } catch (error) {

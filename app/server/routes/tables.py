@@ -1,10 +1,3 @@
-import os
-
-from dotenv import (
-    load_dotenv,
-    find_dotenv
-)
-
 from flask import (
     Blueprint,
     current_app,
@@ -21,18 +14,9 @@ from app.database.queries.get_deliveries import get_deliveries
 from app.database.queries.get_game_sessions import get_game_sessions
 
 
-load_dotenv(find_dotenv())
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(PROJECT_ROOT)
-TEMPLATES_DIR = f"{BASE_DIR}/web/templates"
-STATIC_DIR = f"{BASE_DIR}/web/static"
-ASSETS_DIR = f"{STATIC_DIR}/web/assets"
-
 tables_blueprint = Blueprint(
     'tables',
-    __name__,
-    template_folder=TEMPLATES_DIR,
-    static_folder=STATIC_DIR
+    __name__
 )
 
 

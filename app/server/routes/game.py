@@ -1,10 +1,3 @@
-import os
-
-from dotenv import (
-    load_dotenv,
-    find_dotenv
-)
-
 from flask import (
     Blueprint,
     current_app,
@@ -18,18 +11,9 @@ from flask import (
 from app.database.queries.insert_game_session import insert_game_session
 
 
-load_dotenv(find_dotenv())
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(PROJECT_ROOT)
-TEMPLATES_DIR = f"{BASE_DIR}/web/templates"
-STATIC_DIR = f"{BASE_DIR}/web/static"
-ASSETS_DIR = f"{STATIC_DIR}/web/assets"
-
 game_blueprint = Blueprint(
     'game',
-    __name__,
-    template_folder=TEMPLATES_DIR,
-    static_folder=STATIC_DIR
+    __name__
 )
 
 
