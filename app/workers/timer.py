@@ -18,7 +18,7 @@ from app.utils.pair_players_for_game_session import pair_players_for_game_sessio
 
 MOSCOW_TIMEZONE = ZoneInfo('Europe/Moscow')
 MARGIN_SECONDS = 1
-WEBSOCKET_SERVER_URL = 'wss://localhost:3001'
+WEBSOCKET_SERVER_URL = 'wss://servisplus-development.publicvm.com'
 
 
 def timer_worker():
