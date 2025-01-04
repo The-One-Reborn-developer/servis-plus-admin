@@ -89,7 +89,7 @@ async function displayGameSessions() {
             const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
 
             addMaterialsButton.addEventListener('click', () => {
-                displayAddMaterialForm(gameSessionId); // Open the form for the specific game session
+                displayVideoUploadForm(gameSessionId); // Open the form for the specific game session
             });
 
             actionCell.appendChild(addMaterialsButton);
@@ -108,7 +108,7 @@ async function displayGameSessions() {
 };
 
 
-function displayVideoUploadForm() {
+function displayVideoUploadForm(gameSessionId) {
     const videoUploadForm = document.createElement('form');
     videoUploadForm.innerHTML = `
         <h3 class="add-row-form-header">Загрузить новое видео</h3>
