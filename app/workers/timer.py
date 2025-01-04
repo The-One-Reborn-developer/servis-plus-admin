@@ -71,7 +71,7 @@ def notify_game_session_start(session_id):
     try:
         ws = websocket.create_connection(WEBSOCKET_SERVER_URL)
         payload = {
-            'event': 'game_session_start',
+            'type': 'game_session_start',
             'session_id': session_id,
             'timestamp': datetime.now(MOSCOW_TIMEZONE).isoformat()
         }
