@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const serviceButtons = document.querySelectorAll('.service-select-button');
+    const serviceButtons = document.querySelectorAll('.select-button');
 
     serviceButtons.forEach(button => {
         button.addEventListener('click', async (event) => {
