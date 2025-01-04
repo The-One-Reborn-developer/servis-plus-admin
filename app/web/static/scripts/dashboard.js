@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                             if (service === 'ads' && table.name === 'Видео') {
                                 displayVideoForm();
+                                return;
                             }
                             
                             await fetchTableData(service, table.name);
