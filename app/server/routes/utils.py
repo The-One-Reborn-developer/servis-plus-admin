@@ -18,8 +18,8 @@ from flask import (
 
 load_dotenv(find_dotenv())
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(PROJECT_ROOT)
-ADS_UPLOAD_DIR = f"{BASE_DIR}/videos/ads"
+BASE_DIR = os.path.join(PROJECT_ROOT, '..', '..')
+ADS_UPLOAD_DIR = os.path.join(BASE_DIR, 'videos', 'ads')
 ALLOWED_EXTENSIONS = {'mp4', 'mkv', 'mov', 'avi', 'wmv'}
 
 
