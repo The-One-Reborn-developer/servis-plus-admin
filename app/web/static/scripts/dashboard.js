@@ -36,7 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             const tableButtons = document.querySelectorAll('.table-select-button');
                             tableButtons.forEach(btn => btn.classList.remove('selected'));
                             event.target.classList.add('selected');
-
+                            
+                            if (service === 'ads' && table.name === 'Видео') {
+                                displayVideoForm();
+                            }
+                            
                             await fetchTableData(service, table.name);
 
                             if (service === 'game' && table.name === 'Игровые сессии') {
@@ -58,6 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+function displayVideoForm() {
+    const videoUploadForm = document.createElement('form');
+    videoUploadForm.innerHTML = `
+        <h3 class="add-row-form-header">Добавить новое видео</h3>
+        <div class="add-row-form-group">
+            <label for="video-url">Нажмите на кнопку ниже, чтобы загрузить видео:</label>
+            <input type="file" class="add-row-form-input" id="video-url" name="video-url" required />
+            <button type="submit" class="submit-form-button">Добавить</button>
+        </div>
+    `;
+
+    document.querySelector('.service-data-content').appendChild(videoUploadForm);
+};
+
 
 async function fetchTableData(service, table) {
     try {
