@@ -83,15 +83,16 @@ async function displayGameSessions() {
             const actionCell = document.createElement('td');
             actionCell.className = 'data-table-cell';
 
-            const addButton = document.createElement('button');
-            addButton.textContent = 'Добавить материалы';
+            const addMaterialsButton = document.createElement('button');
+            addMaterialsButton.className = 'add-materials-button';
+            addMaterialsButton.textContent = 'Добавить материалы';
             const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
 
-            addButton.addEventListener('click', () => {
+            addMaterialsButton.addEventListener('click', () => {
                 displayAddMaterialForm(gameSessionId); // Open the form for the specific game session
             });
 
-            actionCell.appendChild(addButton);
+            actionCell.appendChild(addMaterialsButton);
             row.appendChild(actionCell); // Append the action cell to the current row
         };
     });
