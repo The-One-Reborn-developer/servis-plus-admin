@@ -84,7 +84,6 @@ async function displayGameSessions() {
             actionCell.className = 'data-table-cell';
 
             const addButton = document.createElement('button');
-            addButton.className = 'submit-form-button';
             addButton.textContent = 'Добавить материалы';
             const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
 
