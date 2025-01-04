@@ -77,7 +77,7 @@ async function displayGameSessions() {
 
     const rows = table.querySelectorAll('tr:not(.data-table-header)'); // Exclude header row
     rows.forEach(row => {
-        const finishedCell = Array.from(row.children).find(cell => cell.textContent === 'Сессия завершена');
+        const finishedCell = Array.from(row.children).find(cell => cell.textContent === 'Нет');
 
         if (finishedCell) {
             const actionCell = document.createElement('td');
