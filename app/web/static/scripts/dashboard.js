@@ -134,6 +134,7 @@ function displayVideoUploadForm(gameSessionId) {
 
         const formData = new FormData();
         formData.append('video-url', file);
+        formData.append('game-session-id', gameSessionId);
 
         try {
             response = await fetch('/utils/upload-video', {

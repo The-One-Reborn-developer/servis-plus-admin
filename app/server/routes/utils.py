@@ -14,6 +14,8 @@ from flask import (
     jsonify
 )
 
+from app.database.queries.insert_game_session_ad import insert_game_session_ad
+
 
 load_dotenv(find_dotenv())
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -54,12 +56,13 @@ def upload_video():
             'message': 'Недопустимый тип файла'
         }), 400
 
+    session_id = request.form.get('game-session-id')
     filename = secure_filename(file.filename)
     filepath = os.path.join(ADS_UPLOAD_DIR, filename)
 
     try:
         file.save(filepath)
-        current_app.logger.info(f'Video uploaded: {filepath}')
+        insert_game_session_ad(session_id, filepath)
         return jsonify({
             'success': True,
             'message': 'Видео успешно загружено',
