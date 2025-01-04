@@ -77,20 +77,24 @@ async function displayGameSessions() {
 
     const rows = table.querySelectorAll('tr:not(.data-table-header)'); // Exclude header row
     rows.forEach(row => {
-        const actionCell = document.createElement('td');
-        actionCell.className = 'data-table-cell';
+        const finishedCell = Array.from(row.children).find(cell => cell.textContent === 'Сессия завершена');
 
-        const addButton = document.createElement('button');
-        addButton.className = 'add-material-button';
-        addButton.textContent = 'Добавить материалы';
-        const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
+        if (finishedCell) {
+            const actionCell = document.createElement('td');
+            actionCell.className = 'data-table-cell';
 
-        addButton.addEventListener('click', () => {
-            displayAddMaterialForm(gameSessionId); // Open the form for the specific game session
-        });
+            const addButton = document.createElement('button');
+            addButton.className = 'submit-form-button';
+            addButton.textContent = 'Добавить материалы';
+            const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
 
-        actionCell.appendChild(addButton);
-        row.appendChild(actionCell); // Append the action cell to the current row
+            addButton.addEventListener('click', () => {
+                displayAddMaterialForm(gameSessionId); // Open the form for the specific game session
+            });
+
+            actionCell.appendChild(addButton);
+            row.appendChild(actionCell); // Append the action cell to the current row
+        };
     });
 
     // Add a header for the "Add Ad Materials" column
