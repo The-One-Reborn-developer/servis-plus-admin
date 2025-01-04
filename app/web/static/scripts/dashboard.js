@@ -68,15 +68,52 @@ document.addEventListener('DOMContentLoaded', () => {
 function displayVideoForm() {
     const videoUploadForm = document.createElement('form');
     videoUploadForm.innerHTML = `
-        <h3 class="add-row-form-header">Добавить новое видео</h3>
+        <h3 class="add-row-form-header">Загрузить новое видео</h3>
         <div class="add-row-form-group">
             <label for="video-url">Нажмите на кнопку ниже, чтобы загрузить видео:</label>
             <input type="file" class="add-row-form-input" id="video-url" name="video-url" required />
-            <button type="submit" class="submit-form-button">Добавить</button>
+            <button type="submit" class="submit-form-button">Загрузить</button>
         </div>
     `;
 
     document.querySelector('.service-data-content').appendChild(videoUploadForm);
+
+    videoUploadForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const videoInput = document.getElementById('video-url');
+        const file = videoInput.files[0];
+
+        if (!file) {
+            alert('Пожалуйста, выберите видео для загрузки.');
+            return;
+        };
+
+        const formData = new FormData();
+        formData.append('video-url', file);
+
+        try {
+            response = await fetch('/utils/upload-video', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            const uploadStatus = document.createElement('p');
+            uploadStatus.className = 'flash-message';
+            uploadStatus.textContent = result.message;
+
+            document.querySelector('.service-data-content').appendChild(uploadStatus);
+        } catch (error) {
+            console.error('Error uploading video:', error);
+            const uploadStatus = document.createElement('p');
+            uploadStatus.className = 'flash-message error';
+            uploadStatus.textContent = 'Произошла ошибка при загрузке видео. Пожалуйста, попробуйте еще раз.';
+
+            document.querySelector('.service-data-content').appendChild(uploadStatus);
+        };
+    });
 };
 
 
