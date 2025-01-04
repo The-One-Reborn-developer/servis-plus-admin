@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             event.target.classList.add('selected');
                             
                             if (service === 'ads' && table.name === 'Материалы для игровой сессии') {
-                                console.log('Fetching game sessions...');
                                 await displayGameSessions();
                                 return;
                             }
@@ -67,8 +66,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function displayGameSessions() {
-    console.log('Executing displayGameSessions...');
     await fetchTableData('game', 'Игровые сессии');
+
+    // Add "Add Ad Materials" buttons to each row
+    const table = document.querySelector('.data-table'); // Select the rendered table
+    if (!table) {
+        console.error('Game sessions table not found.');
+        return;
+    }
+
+    const rows = table.querySelectorAll('tr:not(.data-table-header)'); // Exclude header row
+    rows.forEach(row => {
+        const actionCell = document.createElement('td');
+        actionCell.className = 'data-table-cell';
+
+        const addButton = document.createElement('button');
+        addButton.className = 'add-material-button';
+        addButton.textContent = 'Добавить материалы';
+        const gameSessionId = row.querySelector('td').textContent; // Assuming the first cell contains the ID
+
+        addButton.addEventListener('click', () => {
+            displayAddMaterialForm(gameSessionId); // Open the form for the specific game session
+        });
+
+        actionCell.appendChild(addButton);
+        row.appendChild(actionCell); // Append the action cell to the current row
+    });
+
+    // Add a header for the "Add Ad Materials" column
+    const headerRow = table.querySelector('.data-table-header');
+    if (headerRow) {
+        const actionHeader = document.createElement('th');
+        actionHeader.className = 'data-table-header-cell';
+        actionHeader.textContent = 'Действия';
+        headerRow.appendChild(actionHeader);
+    };
 };
 
 
