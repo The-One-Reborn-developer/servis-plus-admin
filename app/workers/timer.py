@@ -1,6 +1,7 @@
 import time
 import logging
 import websocket
+import orjson
 
 from datetime import (
     datetime,
@@ -68,8 +69,15 @@ def timer_worker():
 
 def notify_game_session_start(session_id):
     try:
-        ws_url = f'{WEBSOCKET_SERVER_URL}?service=runner&type=game-session-start&session_id={session_id}'
+        ws_url = f'{WEBSOCKET_SERVER_URL}?service=runner'
         ws = websocket.create_connection(ws_url)
+
+        payload = {
+            'type': 'game_session_start',
+            'session_id': session_id
+        }
+        ws.send(orjson.dumps(payload))
+
         ws.close()
     except Exception as e:
         logging.exception(f"Error notifying game session start: {str(e)}")
