@@ -71,9 +71,9 @@ def notify_game_session_start(session_id):
     try:
         ws = websocket.create_connection(WEBSOCKET_SERVER_URL)
         payload = {
+            'service': 'runner',
             'type': 'game_session_start',
-            'session_id': session_id,
-            'timestamp': datetime.now(MOSCOW_TIMEZONE).isoformat()
+            'session_id': session_id
         }
 
         ws.send(orjson.dumps(payload))
