@@ -1,5 +1,6 @@
 import time
 import logging
+import websocket
 
 from datetime import (
     datetime,
@@ -16,6 +17,7 @@ from app.utils.pair_players_for_game_session import pair_players_for_game_sessio
 
 MOSCOW_TIMEZONE = ZoneInfo('Europe/Moscow')
 MARGIN_SECONDS = 1
+WEBSOCKET_SERVER_URL = 'ws://nodejs:3000'
 
 
 def timer_worker():
@@ -47,6 +49,7 @@ def timer_worker():
                     logging.info(f"Game session {session['id']} has finished")
 
                     pair_players_for_game_session(session['id'])
+                    notify_game_session_start(session['id'])
                 # Determine the nearest next event time
                 if not session['started']:
                     next_event_time = min(next_event_time or session_date, session_date)
@@ -61,3 +64,12 @@ def timer_worker():
             time.sleep(next_check)
         except Exception as e:
             logging.exception(f"Error in timer worker: {str(e)}")
+
+
+def notify_game_session_start(session_id):
+    try:
+        ws_url = f'{WEBSOCKET_SERVER_URL}?service=runner&type=game-session-start&session_id={session_id}'
+        ws = websocket.create_connection(ws_url)
+        ws.close()
+    except Exception as e:
+        logging.exception(f"Error notifying game session start: {str(e)}")

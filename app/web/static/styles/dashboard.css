@@ -81,14 +81,14 @@ body {
     font-weight: bold;
 }
 
-.service-select-buttons-container {
+.select-buttons-container {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.service-select-button {
+.select-button {
     margin: 2%;
     padding: 3%;
     width: 90%;
@@ -109,6 +109,14 @@ body {
 	background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.add-materials-button {
+	border-radius: 10px;
+	border: solid 2px grey;
+    background: #C9D6FF;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .selected {
     color: lightblue;
     background: #0f0c29;  /* fallback for old browsers */
@@ -116,14 +124,15 @@ body {
     background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.service-select-button:hover,
+.select-button:hover,
 .table-select-button:hover,
-.submit-form-button:hover {
+.submit-form-button:hover,
+.add-materials-button:hover {
     background: #C9D6FF;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
 }
 
-.service-select-button.selected:hover,
+.select-button.selected:hover,
 .table-select-button.selected:hover,
 .submit-form-button.selected:hover {
     background: #4e54c8;  /* fallback for old browsers */
@@ -131,9 +140,10 @@ body {
     background: linear-gradient(to bottom, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.service-select-button:active,
+.select-button:active,
 .table-select-button:active,
-.submit-form-button:active {
+.submit-form-button:active,
+.add-materials-button:active {
     background: #667db6;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
