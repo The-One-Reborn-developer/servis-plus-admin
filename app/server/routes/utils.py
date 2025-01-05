@@ -58,10 +58,11 @@ def upload_video():
     session_id = request.form.get('game-session-id')
     filename = secure_filename(file.filename)
     filepath = os.path.join(ADS_UPLOAD_DIR, filename)
+    public_path = f'/videos/ads/{filename}'
 
     try:
         file.save(filepath)
-        insert_game_session_ad(session_id, filepath)
+        insert_game_session_ad(session_id, public_path)
         return jsonify({
             'success': True,
             'message': 'Видео успешно загружено',
