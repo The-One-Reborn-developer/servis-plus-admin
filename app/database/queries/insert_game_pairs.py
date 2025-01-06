@@ -15,6 +15,6 @@ def insert_game_pairs(pairs, session_id):
                             'round': '1',
                             'player1_telegram_id': player1_telegram_id,
                             'player2_telegram_id': player2_telegram_id
-                        } for player1_telegram_id, player2_telegram_id in pairs
+                        } for session_id, player1_telegram_id, player2_telegram_id in pairs
                     ]
                 )
