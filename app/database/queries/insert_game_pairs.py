@@ -17,9 +17,9 @@ def insert_game_pairs(pairs, session_id):
                     [
                         {
                             'session_id': session_id,
-                            'round': '1',
-                            'player1_telegram_id': player1_telegram_id,
-                            'player2_telegram_id': player2_telegram_id
-                        } for player1_telegram_id, player2_telegram_id in pairs
+                            'round': 1,
+                            'player1_telegram_id': pair[0],
+                            'player2_telegram_id': pair[1]
+                        } for pair in pairs
                     ]
                 )
