@@ -5,6 +5,8 @@ from app.database.models.game_pairs import GamePair
 
 
 def insert_game_pairs(pairs, session_id):
+    if not session_id:
+        raise ValueError("session_id is required")
     with sync_session() as session:
         with session.begin():
             session.execute(
