@@ -1,3 +1,5 @@
+import logging
+
 from sqlalchemy import insert
 
 from app.database.models.sync_session import sync_session
@@ -9,6 +11,7 @@ def insert_game_pairs(pairs, session_id):
         raise ValueError("session_id is required")
     with sync_session() as session:
         with session.begin():
+            logging.info(f'Inserting {pairs} game pairs for session {session_id}')
             session.execute(
                 insert(GamePair),
                     [
