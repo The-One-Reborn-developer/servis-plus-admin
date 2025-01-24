@@ -4,7 +4,7 @@ from app.database.models.user import User
 from app.database.models.sync_session import sync_session
 
 
-def get_users(service_name):
+def get_users(service_name) -> list:
     fields = []
     
     if service_name == 'services':
@@ -30,6 +30,14 @@ def get_users(service_name):
             User.car_height,
             User.registered_in_delivery,
             User.delivery_registration_date
+        ]
+    elif service_name == 'game':
+        fields = [
+            User.telegram_id,
+            User.game_name,
+            User.game_wallet,
+            User.registered_in_game,
+            User.game_registration_date
         ]
 
     if not fields:

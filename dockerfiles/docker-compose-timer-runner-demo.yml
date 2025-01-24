@@ -1,0 +1,11 @@
+services:
+  worker:
+    build:
+      context: ..
+      dockerfile: dockerfiles/Dockerfile.timer_runner
+    volumes:
+      - /data/servisplus_demo/database.db:/app/app/database/database.db
+    restart: always
+    environment:
+      - LOG_LEVEL=INFO
+      - PYTHONPATH=/app

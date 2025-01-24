@@ -1,10 +1,3 @@
-import os
-
-from dotenv import (
-    load_dotenv,
-    find_dotenv
-)
-
 from flask import (
     Blueprint,
     current_app,
@@ -18,20 +11,12 @@ from flask import (
 from app.database.queries.get_users import get_users
 from app.database.queries.get_bids import get_bids
 from app.database.queries.get_deliveries import get_deliveries
+from app.database.queries.get_game_sessions import get_game_sessions
 
-
-load_dotenv(find_dotenv())
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(PROJECT_ROOT)
-TEMPLATES_DIR = f"{BASE_DIR}/web/templates"
-STATIC_DIR = f"{BASE_DIR}/web/static"
-ASSETS_DIR = f"{STATIC_DIR}/web/assets"
 
 tables_blueprint = Blueprint(
     'tables',
-    __name__,
-    template_folder=TEMPLATES_DIR,
-    static_folder=STATIC_DIR
+    __name__
 )
 
 
@@ -48,7 +33,9 @@ def tables_for_service():
     try:
         service_tables = {
             'services': ['Пользователи', 'Заказы'],
-            'delivery': ['Пользователи', 'Доставки']
+            'delivery': ['Пользователи', 'Доставки'],
+            'game': ['Игровые сессии'],
+            'ads': ['Материалы для игровой сессии']
         }
 
         tables = service_tables.get(service_name, [])
@@ -59,7 +46,9 @@ def tables_for_service():
         return jsonify([{'name': table} for table in tables]), 200
     except Exception as e:
         current_app.logger.error(f'Error fetching tables for service {service_name}: {str(e)}')
-        return jsonify({'error': f'Error fetching tables for service {service_name}: {str(e)}'}), 500
+        return jsonify({
+            'error': f'Error fetching tables for service {service_name}: {str(e)}'
+        }), 500
 
 
 @tables_blueprint.get('/table')
@@ -71,7 +60,10 @@ def table_data():
     table_name = request.args.get('table')
 
     if not service_name or not table_name:
-        return jsonify({'error': 'Service name or table name not provided'}), 400
+        return jsonify({
+            'success': False,
+            'message': 'Необходимо указать имя сервиса и имя таблицы'   
+        }), 400
 
     try:
         if table_name == 'Пользователи':
@@ -80,13 +72,24 @@ def table_data():
             data = get_bids()
         elif table_name == 'Доставки':
             data = get_deliveries()
+        elif table_name == 'Игровые сессии':
+            data = get_game_sessions()
         else:
-            return jsonify({'error': f'Invalid table name provided: {table_name}'}), 400
+            return jsonify({
+                'success': False,
+                'message': 'Таблица не найдена'
+            }), 400
 
         return jsonify(data), 200
     except ValueError as ve:
         current_app.logger.error(f'Validation error for table {table_name}: {str(ve)}')
-        return jsonify({'error': f'Validation error for table {table_name}: {str(ve)}'}), 400
+        return jsonify({
+            'success': False,
+            'message': 'Ошибка валидации'
+        }), 400
     except Exception as e:
         current_app.logger.error(f'Error fetching data for table {table_name}: {str(e)}')
-        return jsonify({'error': f'Error fetching data for table {table_name}: {str(e)}'}), 500
+        return jsonify({
+            'success': False,
+            'message': 'Ошибка при получении данных'
+        }), 500

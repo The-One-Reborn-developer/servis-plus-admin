@@ -9,4 +9,4 @@ sudo docker-compose -p demo_admin -f dockerfiles/docker-compose-demo.yml down -v
 sudo docker-compose -p demo_admin -f dockerfiles/docker-compose-demo.yml build
 
 # Bring up the demo_admin environment
-sudo docker-compose -p demo_admin -f dockerfiles/docker-compose-demo.yml up
+sudo docker-compose -p demo_admin -f dockerfiles/docker-compose-demo.yml up -d

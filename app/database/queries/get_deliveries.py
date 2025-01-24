@@ -4,7 +4,7 @@ from app.database.models.delivery import Delivery
 from app.database.models.sync_session import sync_session
 
 
-def get_deliveries():
+def get_deliveries() -> list:
     with sync_session() as session:
         with session.begin():
             deliveries = session.scalars(select(Delivery)).all()
